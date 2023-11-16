@@ -1,0 +1,106 @@
+create table cricket_1 (player_id int primary key, player_name varchar2(20), runs int, popularity int)
+insert into cricket_1 values(1,'Virat',50,10)
+insert into cricket_1 values(2,'Rohit',41,7)
+insert into cricket_1 values(3,'Jadeja',33,6)
+insert into cricket_1 values(4,'Dhoni',35,15)
+insert into cricket_1 values(5,'Dhawan',45,12)
+insert into cricket_1 values(6,'Yadav',66,10)
+insert into cricket_1 values(7,'Raina',32,9)
+insert into cricket_1 values(8,'Binny',44,11)
+insert into cricket_1 values(9,'Rayudu',63,12)
+insert into cricket_1 values(10,'Rahane',21,10)
+insert into cricket_1 values(11,'A.patel',12,9)
+insert into cricket_1 values(12,'B.Kumar',30,7)
+select * from cricket_1
+
+create table cricket_2 (player_id int primary key, player_name varchar2(20), runs int, charisma int)
+insert into cricket_2 values(1,'Virat',50,55)
+insert into cricket_2 values(2,'Rohit',41,30)
+insert into cricket_2 values(3,'Jadeja',33,24)
+insert into cricket_2 values(4,'Dhoni',35,59)
+insert into cricket_2 values(13,'Yuraaj',33,50)
+insert into cricket_2 values(6,'Yadav',66,35)
+insert into cricket_2 values(14,'Tendulkar',74,80)
+insert into cricket_2 values(8,'Binny',44,32)
+insert into cricket_2 values(9,'Rayudu',63,39)
+insert into cricket_2 values(15,'Dravid',65,55)
+insert into cricket_2 values(16,'Yusuf',40,40)
+select * from cricket_2
+
+select player_id,player_name from cricket_2
+alter table cricket_1 rename column runs to score
+alter table cricket_1 rename column score to runs
+alter table cricket_1 add contact int
+ALTER TABLE cricket_1 DROP COLUMN contact;
+
+
+
+create table cricket_3 (player_id int primary key, player_name varchar2(20), runs int, charisma int)
+insert into cricket_3 values(15,'Dravid',65,55)
+insert into cricket_3 values(16,'Yusuf',40,40)
+select * from cricket_3
+
+TRUNCATE TABLE Cricket_3;
+drop table cricket_3
+
+update cricket_1 set runs=42 where player_id=2;
+
+select * from cricket_1 where player_id=1 and runs=50
+select * from cricket_1 where player_id=2 or runs=50
+select * from cricket_1 where player_name='Virat' and runs!=50
+
+select * from cricket_1 where runs between 40 and 65
+select * from cricket_1 where runs is null
+select * from cricket_1 where runs in (45, 50, 60)
+
+
+select avg (runs) from cricket_1
+select max (runs) from cricket_1
+select min (runs) from cricket_1
+select sum (runs) from cricket_1
+
+
+
+SELECT cricket_1.player_id, cricket_2.player_name FROM cricket_1  INNER JOIN cricket_2 ON cricket_1.player_ID = cricket_2.player_id;
+SELECT cricket_1.player_id, cricket_2.player_name FROM cricket_1  LEFT JOIN  cricket_2 ON cricket_1.player_ID = cricket_2.player_id;
+SELECT cricket_1.player_id, cricket_2.player_name FROM cricket_1  right JOIN  cricket_2 ON cricket_1.player_ID = cricket_2.player_id;
+SELECT cricket_1.player_id, cricket_2.player_name FROM cricket_1  JOIN  cricket_2 ON cricket_1.player_ID = cricket_2.player_id;
+SELECT cricket_1.player_id, cricket_2.player_name FROM cricket_1  JOIN  cricket_2 ON cricket_1.player_ID = cricket_2.player_id ORDER BY cricket_1.player_Name;
+
+
+
+select player_name, popularity from cricket_1 where popularity > (select avg(popularity) from cricket_1)
+select avg(popularity) from cricket_1   --Avg polularity
+
+select player_name,player_id from cricket_1 where cricket_1.player_id in (select player_id from cricket_2)
+
+select player_id,player_name, runs from cricket_1 where runs > (select avg(runs) from cricket_1)
+
+
+#Write a query in SQL to display the full name (first and last name), and salary for those employees who earn below 6000.
+select player_id , player_name from cricket_1 where runs <60;
+
+
+select player_id , count(runs) , sum(runs) , max(runs), min(runs) from cricket_1 group by player_id;
+
+
+SELECT player_name, SUM(runs) FROM cricket_2 GROUP BY player_name;
+
+
+SELECT player_name, runs,
+    CASE
+    WHEN runs > 50 THEN 'Good'
+    WHEN runs = 50 THEN 'Not Bad'
+    ELSE 'Better Luck Next Time'
+END AS Progress
+FROM cricket_1;
+
+
+
+
+
+
+
+
+
+
